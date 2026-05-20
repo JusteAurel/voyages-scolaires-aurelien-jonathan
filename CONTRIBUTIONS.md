@@ -4,13 +4,8 @@
 # Contributions — Phase 2
 | Bloc              | Responsable   | Statut        | Commits clés |
 |------             |-------------  |--------       |--------------|
-<<<<<<< Updated upstream
 | A — Auth + Rôles  | Aurélien      | A faire      |       -      |
 | B — Modèles       | Aurélien      | En cours      |       -      |
-=======
-| A — Auth + Rôles  | Aurélien      | Terminé       |    68c0c84   |
-| B — Modèles       | Aurélien      | Terminé       |    a35eb69   |
->>>>>>> Stashed changes
 | C — CRUD Voyages  | Jonathan      | En cours      |       —      |
 | D — Participants  | Jonathan      | À faire       |       —      |
 | E — API REST      | Binôme        | À faire       |       —      |

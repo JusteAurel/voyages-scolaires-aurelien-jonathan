@@ -10,7 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
+// !!! LES TROIS IMPORTS INDISPENSABLES À RAJOUTER ICI !!!
+use App\Models\Voyage;
+use App\Models\Participant;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+#[Fillable(['name', 'email', 'password', 'role'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -28,5 +33,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Un enseignant peut créer plusieurs voyages.
+     */
+    public function voyages(): HasMany
+    {
+        return $this->hasMany(Voyage::class, 'user_id');
+    }
+
+    /**
+     * Un élève peut avoir plusieurs fiches d'inscriptions.
+     */
+    public function inscriptions(): HasMany
+    {
+        return $this->hasMany(Participant::class);
     }
 }
