@@ -1,9 +1,9 @@
 # Contributions — Phase 2
 | Bloc              | Responsable   | Statut        | Commits clés |
 |------             |-------------  |--------       |--------------|
-| A — Auth + Rôles  | Aurélien      | En cours      |       -      |
+| A — Auth + Rôles  | Aurélien      | A faire      |       -      |
 | B — Modèles       | Aurélien      | En cours      |       -      |
-| C — CRUD Voyages  | Jonathan      | À faire       |       —      |
+| C — CRUD Voyages  | Jonathan      | En cours      |       —      |
 | D — Participants  | Jonathan      | À faire       |       —      |
 | E — API REST      | Jonathan      | À faire       |       —      |
 ## Auto-évaluation (à remplir en fin de phase)
