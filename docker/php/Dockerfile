@@ -1,5 +1,9 @@
 FROM php:8.3-fpm-alpine
 
+RUN apk add --no-cache icu-dev \
+    && docker-php-ext-configure intl \
+    && docker-php-ext-install intl pdo_mysql
+
 RUN apk add --no-cache \
 git unzip curl libpng-dev oniguruma-dev \
 libxml2-dev libzip-dev zip
