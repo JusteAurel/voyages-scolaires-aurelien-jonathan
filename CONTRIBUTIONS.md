@@ -33,10 +33,9 @@
 
 | Bloc                                   | Responsable  | Statut    | Commits clés  |
 |--------------------------------------  | -----------  | --------  | ------------  |
-| **A** - Dockerfile prod + CI/CD        | **Aurélien** | Terminé  | 62d9203, cd7373b, 79f716b, 91e1538, c454da7, 2105431, 432f9a5, 1ae924b |
-| **B** - Manifests stateless + sessions | **Aurélien** | Terminé   |   32c8932, ad5d01e, f04d553, 38b646c  |
->>>>>>> origin/Phase-3-BLOC-B
-| **C** - Stateful + backup + monitoring | **Jonathan** | À faire   |               |
+| **A** - Dockerfile prod + CI/CD        | **Aurélien** | Terminé   | 62d9203, cd7373b, 79f716b, 91e1538, c454da7, 2105431, 432f9a5, 1ae924b |
+| **B** - Manifests stateless + sessions | **Aurélien** | Terminé   | 32c8932, ad5d01e, f04d553, 38b646c  |
+| **C** - Stateful + backup + monitoring | **Jonathan** | Terminé   | b759174, daff156, 0a49ce7, bccb0f5, cc557ff, 69b0606 |
 
 ## Décisions d'architecture
 
