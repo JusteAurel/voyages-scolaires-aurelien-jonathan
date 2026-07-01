@@ -1,3 +1,4 @@
+# Relance du pipeline propre
 name: CI/CD
 on:
   push:
