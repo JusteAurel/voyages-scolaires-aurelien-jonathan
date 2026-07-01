@@ -11,7 +11,7 @@
 | E — API REST      | Binôme        | À faire       |       —      |
 
 ## Auto-évaluation (à remplir en fin de phase)
-### Prénom1
+### Aurélien
 - Ce que j'ai réalisé : 
     Blocs Réalisés :
         Bloc A (Authentification, Rôles, Policies) et Bloc B (Modèle, Migrations, Relations Eloquent).
@@ -26,3 +26,26 @@
 - Ce que j'ai appris : 
     - Compréhension de l'architecture éphémère de Docker : les conteneurs peuvent être détruits et recréés (`docker compose down / up`) sans perte de données tant que les volumes nommés persistants et les Bind Mounts sont correctement configurés.
     - Manipulation avancée du framework ORM Eloquent et gestion fine des autorisations de requêtes côté serveur avec les *Policies*.
+
+
+
+# Contributions - Phase 3
+
+| Bloc                                   | Responsable  | Statut    | Commits clés  |
+|--------------------------------------  | -----------  | --------  | ------------  |
+| **A** - Dockerfile prod + CI/CD        | **Aurélien** | En cours  |               |
+| **B** - Manifests stateless + sessions | **Aurélien** | À faire   |               |
+| **C** - Stateful + backup + monitoring | **Jonathan** | À faire   |               |
+
+## Décisions d'architecture
+
+### 1. Image unique Apache vs pod multi-conteneurs (nginx + fpm)
+
+
+### 2. Driver de sessions
+
+
+### 3. Stratégie de tag d'images (:latest vs :sha)
+
+
+## Auto-évaluation (fin de phase)
