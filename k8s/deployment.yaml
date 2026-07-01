@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel
+  namespace: default
+spec:
+  [cite_start]replicas: 2 # [cite: 139] Haute disponibilité avec 2 pods exécutés simultanément 
+  selector:
+    matchLabels:
+      [cite_start]app: laravel [cite: 140]
+  template:
+    metadata:
+      labels:
+        [cite_start]app: laravel #  Doit correspondre exactement au selector
+    spec:
+      containers:
+        - name: laravel
+          # REMPLACE PAR TON PROPRE LIEN GHCR (TOUT EN MINUSCULES) 
+          [cite_start]image: ghcr.io/ton-username-github/nom-de-ton-repo:latest [cite: 140]
+          imagePullPolicy: Always
+          ports:
+            - [cite_start]containerPort: 80 # [cite: 141] Apache écoute sur le port 80 dans l'image prod [cite: 141]
+          
+          # Chargement des variables et secrets [cite: 143]
+          [cite_start]envFrom: [cite: 143]
+            - [cite_start]configMapRef: [cite: 143]
+                [cite_start]name: laravel-config [cite: 143]
+            - [cite_start]secretRef: [cite: 143]
+                [cite_start]name: laravel-secrets [cite: 143]
+          
+          # Sonde de viabilité (Redémarre le conteneur s'il freeze) [cite: 144, 208]
+          [cite_start]livenessProbe: [cite: 144]
+            [cite_start]httpGet: [cite: 144]
+              [cite_start]path: /up # [cite: 144] Route de santé native de Laravel [cite: 145]
+              [cite_start]port: 80 [cite: 144]
+            [cite_start]initialDelaySeconds: 10 # [cite: 144] Laisse 10s à Apache pour démarrer
+            periodSeconds: 10
+          
+          # Sonde de disponibilité (Aiguille le trafic HTTP uniquement si l'app répond) [cite: 144, 208]
+          [cite_start]readinessProbe: [cite: 144]
+            [cite_start]httpGet: [cite: 145]
+              [cite_start]path: /up # [cite: 145] Même route de santé [cite: 145]
+              [cite_start]port: 80 [cite: 145]
+            [cite_start]initialDelaySeconds: 5 [cite: 145]
+            periodSeconds: 5
