@@ -8,7 +8,7 @@
 | B — Modèles       | Aurélien      | Terminé       |    a35eb69   |
 | C — CRUD Voyages  | Jonathan      | Terminé       |    17fff5d   |
 | D — Participants  | Jonathan      | Terminé       |    9744d56   |
-| E — API REST      | Binôme        | À faire       |       —      |
+| E — API REST      | Jonathan      | Terminé       |    651baaf   |
 
 ## Auto-évaluation (à remplir en fin de phase)
 ### Prénom1
