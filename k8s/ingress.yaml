@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  [cite_start]name: laravel [cite: 150]
+  namespace: default
+spec:
+  rules:
+    - [cite_start]http: [cite: 150]
+        [cite_start]paths: [cite: 150]
+          - [cite_start]path: / [cite: 150]
+            [cite_start]pathType: Prefix [cite: 150]
+            [cite_start]backend: [cite: 150]
+              [cite_start]service: [cite: 150]
+                [cite_start]name: laravel # [cite: 150] Fait le lien direct avec ton Service ci-dessus [cite: 148, 150]
+                [cite_start]port: [cite: 151]
+                  [cite_start]number: 80 [cite: 151]
