@@ -1,0 +1,48 @@
+apiVersion: batch/v1
+kind: CronJob
+
+metadata:
+  name: mariadb-backup
+
+spec:
+  schedule: "0 2 * * *"
+
+  jobTemplate:
+
+    spec:
+
+      template:
+
+        spec:
+
+          restartPolicy: OnFailure
+
+          containers:
+
+            - name: backup
+
+              image: mariadb:11
+
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  mkdir -p /backup
+                  mysqldump \
+                    -hmariadb \
+                    -u$DB_USERNAME \
+                    -p$DB_PASSWORD \
+                    voyages_scolaires \
+                    > /backup/backup-$(date +%F-%H-%M).sql
+
+              envFrom:
+                - secretRef:
+                    name: laravel-secrets
+
+              volumeMounts:
+                - name: backup-storage
+                  mountPath: /backup
+
+          volumes:
+            - name: backup-storage
+              emptyDir: {}

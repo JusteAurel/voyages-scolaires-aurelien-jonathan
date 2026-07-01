@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: mariadb
+
+spec:
+  serviceName: mariadb
+
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: mariadb
+
+  template:
+    metadata:
+      labels:
+        app: mariadb
+
+    spec:
+      containers:
+
+        - name: mariadb
+
+          image: mariadb:11
+
+          ports:
+            - containerPort: 3306
+
+          env:
+
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: laravel-secrets
+                  key: DB_ROOT_PASSWORD
+
+            - name: MARIADB_DATABASE
+              value: voyages_scolaires
+
+            - name: MARIADB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: laravel-secrets
+                  key: DB_USERNAME
+
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: laravel-secrets
+                  key: DB_PASSWORD
+
+          volumeMounts:
+            - name: mariadb-storage
+              mountPath: /var/lib/mysql
+
+  volumeClaimTemplates:
+
+    - metadata:
+        name: mariadb-storage
+
+      spec:
+
+        accessModes:
+          - ReadWriteOnce
+
+        resources:
+          requests:
+            storage: 2Gi

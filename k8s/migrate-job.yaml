@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: laravel-migrate
+
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+
+      containers:
+        - name: migrate
+
+          image: ghcr.io/justeaurel/voyages-scolaires-aurelien-jonathan:latest
+          imagePullPolicy: Always
+
+          command:
+            - php
+            - artisan
+            - migrate
+            - --force
+
+          envFrom:
+            - configMapRef:
+                name: laravel-config
+
+            - secretRef:
+                name: laravel-secrets
