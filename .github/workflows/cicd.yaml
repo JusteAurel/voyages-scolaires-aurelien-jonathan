@@ -18,6 +18,9 @@ jobs:
       - run: composer install --no-interaction --no-progress
       - run: cp .env.example .env && php artisan key:generate
       - run: php artisan test
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: :memory:
 
   build-push:
     needs: tests
