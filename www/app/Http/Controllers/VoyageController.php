@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class VoyageController extends Controller
 {

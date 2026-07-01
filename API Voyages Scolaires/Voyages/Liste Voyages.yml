@@ -1,0 +1,18 @@
+info:
+  name: Liste Voyages
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: http://localhost:8080/api/voyages
+  headers:
+    - name: Authorization
+      value: Bearer 8|t5wCr9kp3eMHEhzemY8zMiVHd6lUdu2P7AnSrvhEae871fb0
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

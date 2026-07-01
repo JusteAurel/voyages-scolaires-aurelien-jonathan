@@ -1,0 +1,22 @@
+info:
+  name: Login
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: http://localhost:8080/api/login
+  body:
+    type: json
+    data: |-
+      {
+          "email": "jonathan.asset2062@gmail.com",
+          "password": "test1234"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

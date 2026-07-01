@@ -1,0 +1,27 @@
+info:
+  name: Créer Voyage
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: http://localhost:8080/api/voyages
+  headers:
+    - name: Authorization
+      value: Bearer 8|t5wCr9kp3eMHEhzemY8zMiVHd6lUdu2P7AnSrvhEae871fb0
+  body:
+    type: json
+    data: |-
+      {
+          "destination":"Rome",
+          "date_depart":"2026-09-10",
+          "date_retour":"2026-09-15",
+          "places_max":40
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
