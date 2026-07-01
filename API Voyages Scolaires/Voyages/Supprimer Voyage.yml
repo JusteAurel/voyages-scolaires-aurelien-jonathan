@@ -1,0 +1,18 @@
+info:
+  name: Supprimer Voyage
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: http://localhost:8080/api/voyages/5
+  headers:
+    - name: Authorization
+      value: Bearer 8|t5wCr9kp3eMHEhzemY8zMiVHd6lUdu2P7AnSrvhEae871fb0
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

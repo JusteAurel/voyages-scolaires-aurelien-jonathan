@@ -7,8 +7,8 @@
 | A — Auth + Rôles  | Aurélien      | Terminé       |    68c0c84   |
 | B — Modèles       | Aurélien      | Terminé       |    a35eb69   |
 | C — CRUD Voyages  | Jonathan      | Terminé       |    17fff5d   |
-| D — Participants  | Jonathan      | À faire       |       —      |
-| E — API REST      | Binôme        | À faire       |       —      |
+| D — Participants  | Jonathan      | Terminé       |    9744d56   |
+| E — API REST      | Jonathan      | Terminé       |    651baaf   |
 
 ## Auto-évaluation (à remplir en fin de phase)
 ### Aurélien
