@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  [cite_start]name: laravel # [cite: 147] Le nom du service utilisé pour le routage de l'Ingress 
+  namespace: default
+spec:
+  selector:
+    [cite_start]app: laravel # [cite: 147] Cible les pods avec le label 'app: laravel' [cite: 147, 148]
+  ports:
+    - [cite_start]port: 80 [cite: 148]
+      [cite_start]targetPort: 80 #  Envoie vers le port 80 du conteneur Apache
