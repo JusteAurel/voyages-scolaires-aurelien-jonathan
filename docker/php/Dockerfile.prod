@@ -1,0 +1,24 @@
+FROM php:8.3-apache
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN docker-php-ext-install \
+    pdo_mysql mbstring exif pcntl bcmath gd zip
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+# DocumentRoot public/ + URL rewriting Laravel
+RUN sed -ri 's!/var/www/html!/var/www/html/public!g' \
+    /etc/apache2/sites-available/000-default.conf \
+    && a2enmod rewrite
+
+WORKDIR /var/www/html
+
+COPY www/
+
+RUN composer install --no-dev --optimize-autoloader \
+    --no-interaction --no-progress
+
+RUN chown -R www-data:www-data storage bootstrap/cache
