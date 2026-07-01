@@ -16,7 +16,7 @@ RUN sed -ri 's!/var/www/html!/var/www/html/public!g' \
 
 WORKDIR /var/www/html
 
-COPY www/
+COPY www/ .
 
 RUN composer install --no-dev --optimize-autoloader \
     --no-interaction --no-progress
