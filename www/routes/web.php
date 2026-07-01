@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\VoyageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,6 +18,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/voyages/{voyage}/participants', [ParticipantController::class, 'store'])->name('participants.store');
+    Route::patch('/participants/{participant}/autoriser', [ParticipantController::class, 'autoriser'])->name('participants.autoriser');
+    Route::delete('/participants/{participant}', [ParticipantController::class, 'destroy'])->name('participants.destroy');
 });
 
 require __DIR__.'/auth.php';

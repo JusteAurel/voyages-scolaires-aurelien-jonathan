@@ -10,7 +10,7 @@ class VoyageController extends Controller
 {
     public function index()
     {
-        $voyages = Voyage::all();
+        $voyages = Voyage::with('responsable')->get();
 
         return view('voyages.index', compact('voyages'));
     }
@@ -40,6 +40,8 @@ class VoyageController extends Controller
 
     public function show(Voyage $voyage)
     {
+        $voyage->load('participants.user');
+
         return view('voyages.show', compact('voyage'));
     }
 
@@ -52,7 +54,7 @@ class VoyageController extends Controller
     {
         $validated = $request->validate([
             'destination' => 'required|string|max:255',
-            'date_depart' => 'required|date',
+            'date_depart' => 'required|date|after:today',
             'date_retour' => 'required|date|after:date_depart',
             'places_max' => 'required|integer|min:1',
         ]);
