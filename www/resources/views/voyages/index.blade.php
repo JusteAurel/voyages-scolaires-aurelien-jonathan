@@ -18,11 +18,13 @@
 
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-lg font-bold">Tous les voyages</h3>
-
+                    
+                    @if(auth()->user()->role === 'admin')
                     <a href="{{ route('voyages.create') }}"
                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                         Nouveau voyage
                     </a>
+                    @endif
                 </div>
 
                 @if($voyages->isEmpty())
@@ -55,6 +57,7 @@
 
                                 <td class="p-2">{{ $voyage->places_max }}</td>
 
+                                @if(auth()->user()->role === 'admin')
                                 <td class="p-2 text-center">
 
                                     <a href="{{ route('voyages.show',$voyage) }}"
@@ -86,7 +89,7 @@
                                     </form>
 
                                 </td>
-
+                                @endif
                             </tr>
 
                         @endforeach

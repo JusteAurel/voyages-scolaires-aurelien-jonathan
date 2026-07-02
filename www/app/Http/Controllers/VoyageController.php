@@ -19,11 +19,17 @@ class VoyageController extends Controller
 
     public function create()
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         return view('voyages.create');
     }
 
     public function store(Request $request) : RedirectResponse
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         $validated = $request->validate([
             'destination' => 'required|string|max:255',
             'date_depart' => 'required|date|after:today',
@@ -54,11 +60,17 @@ class VoyageController extends Controller
 
     public function edit(Voyage $voyage)
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         return view('voyages.edit', compact('voyage'));
     }
 
     public function update(Request $request, Voyage $voyage)
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         $validated = $request->validate([
             'destination' => 'required|string|max:255',
             'date_depart' => 'required|date',
@@ -75,6 +87,9 @@ class VoyageController extends Controller
 
     public function destroy(Voyage $voyage)
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         $voyage->delete();
 
         return redirect()

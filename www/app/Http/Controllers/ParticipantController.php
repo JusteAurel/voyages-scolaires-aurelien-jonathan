@@ -11,6 +11,9 @@ class ParticipantController extends Controller
 {
     public function store(Request $request, Voyage $voyage): RedirectResponse
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         $request->validate([
             'user_id' => 'required|exists:users,id',
         ]);
@@ -33,6 +36,9 @@ class ParticipantController extends Controller
 
     public function autoriser(Participant $participant): RedirectResponse
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         $participant->update([
             'autorisation_parent' => !$participant->autorisation_parent,
         ]);
@@ -47,6 +53,9 @@ class ParticipantController extends Controller
 
     public function destroy(Participant $participant): RedirectResponse
     {
+        if(Auth::user()->role !== 'admin'){
+            abort(403);
+        }
         $participant->delete();
 
         return back()->with('success', 'Participant retiré du voyage.');
