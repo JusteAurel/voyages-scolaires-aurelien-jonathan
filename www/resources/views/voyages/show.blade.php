@@ -29,41 +29,79 @@
 
         </div>
     </div>
+    @if(auth()->user()->role === 'admin')
+        <h3 class="text-lg font-semibold mt-6 mb-3">
+            Inscrire un participant
+        </h3>
 
-    <h3 class="text-lg font-semibold mt-6 mb-3">
-        Inscrire un participant
-    </h3>
+        <form
+            action="{{ route('participants.store',$voyage) }}"
+            method="POST">
 
-    <form
-        action="{{ route('participants.store',$voyage) }}"
-        method="POST">
+            @csrf
 
-        @csrf
+            <select
+                name="user_id"
+                class="border rounded p-2">
 
-        <select
-            name="user_id"
-            class="border rounded p-2">
+                @foreach(\App\Models\User::all() as $user)
 
-            @foreach(\App\Models\User::all() as $user)
+                    <option value="{{ $user->id }}">
 
-                <option value="{{ $user->id }}">
+                        {{ $user->name }}
 
-                    {{ $user->name }}
+                    </option>
 
-                </option>
+                @endforeach
 
-            @endforeach
+            </select>
 
-        </select>
+            <button
+                class="bg-blue-600 text-white px-4 py-2 rounded">
 
-        <button
-            class="bg-blue-600 text-white px-4 py-2 rounded">
+                Inscrire
 
-            Inscrire
+            </button>
 
-        </button>
+        </form>
 
-    </form>
+    @else
+
+        @php
+            $estInscrit = $voyage->participants->contains('user_id', auth()->id());
+        @endphp
+
+        @if(!$estInscrit)
+
+            <form action="{{ route('participants.inscription', $voyage) }}" method="POST">
+
+                @csrf
+
+                <button class="bg-green-600 text-white px-4 py-2 rounded">
+                    M'inscrire au voyage
+                </button>
+
+            </form>
+
+        @else
+
+            <p class="mt-6 text-green-600 font-semibold">
+                ✅ Vous êtes inscrit à ce voyage.
+            </p>
+
+        @endif
+
+            <form method="POST"
+                action="{{ route('participants.desinscription', $voyage) }}">
+                @csrf
+                @method('DELETE')
+
+                <button class="bg-red-600 text-white px-4 py-2 rounded">
+                    Se désinscrire
+                </button>
+            </form>
+
+    @endif
 
     <hr class="my-6">
 

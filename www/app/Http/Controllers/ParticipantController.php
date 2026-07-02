@@ -6,6 +6,7 @@ use App\Models\Participant;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 
 class ParticipantController extends Controller
 {
@@ -59,5 +60,39 @@ class ParticipantController extends Controller
         $participant->delete();
 
         return back()->with('success', 'Participant retiré du voyage.');
+    }
+
+    public function inscription(Voyage $voyage)
+    {
+        $user = Auth::user();
+
+        if ($user->role !== 'eleve') {
+            abort(403);
+        }
+
+        if ($voyage->participants()->where('user_id', $user->id)->exists()) {
+            return back()->with('error', 'Vous êtes déjà inscrit.');
+        }
+
+        if ($voyage->participants()->count() >= $voyage->places_max) {
+            return back()->with('error', 'Le voyage est complet.');
+        }
+
+        Participant::create([
+            'voyage_id' => $voyage->id,
+            'user_id' => $user->id,
+            'autorisation_parent' => false,
+        ]);
+
+        return back()->with('success', 'Inscription effectuée.');
+    }
+
+    public function desinscription(Voyage $voyage)
+    {
+        Participant::where('voyage_id', $voyage->id)
+            ->where('user_id', Auth::id())
+            ->delete();
+
+        return back()->with('success', 'Vous êtes désinscrit.');
     }
 }

@@ -29,6 +29,10 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/participants/{participant}', [ParticipantController::class, 'destroy'])
         ->name('participants.destroy');
+
+    Route::post('/voyages/{voyage}/inscription', [ParticipantController::class, 'inscription'])->name('participants.inscription');
+
+    Route::delete('/voyages/{voyage}/inscription', [ParticipantController::class, 'desinscription'])->name('participants.desinscription');
 });
 
 require __DIR__.'/auth.php';
