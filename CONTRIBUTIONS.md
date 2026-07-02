@@ -27,6 +27,27 @@
     - Compréhension de l'architecture éphémère de Docker : les conteneurs peuvent être détruits et recréés (`docker compose down / up`) sans perte de données tant que les volumes nommés persistants et les Bind Mounts sont correctement configurés.
     - Manipulation avancée du framework ORM Eloquent et gestion fine des autorisations de requêtes côté serveur avec les *Policies*.
 
+### Jonathan
+- Ce que j'ai réalisé :
+    Blocs réalisés :
+        Bloc C (CRUD Voyages), Bloc D (Gestion des Participants) et Bloc E (API REST).
+
+    Ce que j'ai implémenté :
+        - Développement complet du contrôleur `VoyageController` avec les opérations CRUD (création, consultation, modification et suppression des voyages).
+        - Réalisation de l'ensemble des vues Blade (`index`, `create`, `show`, `edit`) et intégration des routes protégées par authentification.
+        - Mise en place de la gestion des participants à un voyage avec contrôle des doublons, ajout, suppression et gestion de l'autorisation parentale.
+        - Développement d'une API REST sécurisée avec Laravel Sanctum permettant l'authentification par jeton.
+        - Création des endpoints REST pour la gestion des voyages et la consultation des participants.
+        - Validation et tests de l'ensemble des routes API avec Bruno.
+
+- Difficulté principale :
+    La mise en place de l'API REST avec Laravel Sanctum ainsi que la compréhension du mécanisme d'authentification par jetons. Il a également fallu résoudre plusieurs problèmes de routage entre les routes Web et API ainsi que les conflits de noms de routes générés automatiquement par Laravel. J'ai essayé de faire les tests avec des routes API avec Postman mais je n'ai pas réussi à créer une collection avec plusieurs j'ai trouvé l'interface pas très agréable à utiliser du coup j'ai abandonné et j'ai recommencé sur Bruno
+
+- Ce que j'ai appris :
+    - Développer une API REST complète avec Laravel et sécuriser ses endpoints grâce à Laravel Sanctum.
+    - Maîtriser les contrôleurs RESTful, les Resource Controllers et les routes API.
+    - Utiliser Bruno pour tester les différentes méthodes HTTP (GET, POST, PUT, DELETE) ainsi que les mécanismes d'authentification Bearer Token.
+    - Mettre en œuvre les relations Eloquent pour gérer efficacement les participants d'un voyage et leurs autorisations.
 
 
 # Contributions - Phase 3
@@ -63,4 +84,23 @@ Suivant les bonnes pratiques de sécurité, la configuration non sensible est ce
   * Intégration de sondes de santé natives à Laravel 11 (`livenessProbe` et `readinessProbe` pointant vers la route `/up`) pour assurer l'auto-guérison (*self-healing*) des conteneurs par le cluster.
 * **Difficulté principale :** L'analyse des journaux d'erreurs au sein d'un environnement virtualisé à distance (GitHub Actions Runner) et la gymnastique d'aiguillage des branches Git pour séparer proprement le code applicatif du code d'infrastructure sans empiéter sur le bloc de mon binôme.
 * **Ce que j'ai appris :** La manipulation experte des concepts natifs Kubernetes pour concevoir une application hautement disponible et *stateless*, la mise en place d'une politique de sécurité stricte pour la gestion des secrets et la maîtrise des flux réseau internes d'un cluster (`Ingress -> Service -> Pods`).
->>>>>>> origin/Phase-3-BLOC-B
+
+### Jonathan (Bloc C)
+
+* **Ce que j'ai réalisé :**
+  * Déploiement de la base de données MariaDB sous Kubernetes à l'aide d'un `StatefulSet` garantissant l'identité stable du conteneur et la persistance des données.
+  * Mise en place du stockage persistant via un `PersistentVolumeClaim` afin d'assurer la conservation des données de la base même après le redémarrage ou la recréation du pod.
+  * Création d'un `Service` Kubernetes permettant aux pods Laravel de communiquer avec MariaDB au sein du cluster.
+  * Développement d'un `Job` Kubernetes exécutant automatiquement les migrations Laravel (`php artisan migrate --force`) lors du déploiement de l'application.
+  * Mise en place d'un `CronJob` Kubernetes réalisant automatiquement des sauvegardes régulières de la base de données MariaDB.
+  * Vérification du bon fonctionnement de l'ensemble de l'architecture Kubernetes (Deployment, StatefulSet, Services, PVC, Job et CronJob) au travers des commandes `kubectl` et de l'analyse des journaux des conteneurs.
+
+* **Difficulté principale :**
+  La compréhension des objets Kubernetes dédiés aux applications avec état (*StatefulSet*, *PersistentVolumeClaim*, *Job* et *CronJob*) ainsi que leur interaction avec Laravel. Il a également fallu résoudre plusieurs erreurs de configuration YAML, de communication entre les pods et de déploiement avant d'obtenir une infrastructure entièrement fonctionnelle.
+
+* **Ce que j'ai appris :**
+  - Déployer une base de données persistante dans Kubernetes avec un `StatefulSet`.
+  - Gérer la persistance des données grâce aux volumes Kubernetes.
+  - Automatiser les tâches d'administration (migrations et sauvegardes) avec les objets `Job` et `CronJob`.
+  - Utiliser les outils d'administration Kubernetes (`kubectl logs`, `kubectl describe`, `kubectl get`) afin de diagnostiquer et corriger les problèmes de déploiement.
+  - Comprendre l'architecture complète d'une application conteneurisée reposant sur plusieurs ressources Kubernetes communiquant entre elles.
