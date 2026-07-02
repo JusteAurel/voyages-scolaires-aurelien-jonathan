@@ -28,7 +28,7 @@ spec:
                 - -c
                 - |
                   mkdir -p /backup
-                  mysqldump \
+                  mariadb-dump \
                     -hmariadb \
                     -u$DB_USERNAME \
                     -p$DB_PASSWORD \
