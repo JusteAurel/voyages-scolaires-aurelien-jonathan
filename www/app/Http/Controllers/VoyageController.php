@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Voyage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,7 +42,14 @@ class VoyageController extends Controller
 
     public function show(Voyage $voyage)
     {
-        return view('voyages.show', compact('voyage'));
+        $voyage->load('participants.user');
+
+        $users = User::whereNotIn(
+            'id',
+            $voyage->participants()->pluck('user_id')
+        )->get();
+
+        return view('voyages.show', compact('voyage', 'users'));
     }
 
     public function edit(Voyage $voyage)
